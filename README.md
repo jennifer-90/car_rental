@@ -3,7 +3,7 @@
 
 1.  ### Cloner le projet depuis Github
 ``` 
-git clone https://github.com/jennifer-90/TEST_FRAMEWORK_LARAVEL.git
+git clone https://github.com/jennifer-90/car_rental.git
 ```
 
 2. ### Accéder au répertoire du projet
