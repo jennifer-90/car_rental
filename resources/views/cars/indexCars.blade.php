@@ -14,4 +14,5 @@
     @endforeach
 @endif
 
-<a href="{{ route('car.create') }}">Créer une nouvelle voiture</a>
+<br><a href="{{ route('car.create') }}"><button>Créer une nouvelle voiture</button></a>
+

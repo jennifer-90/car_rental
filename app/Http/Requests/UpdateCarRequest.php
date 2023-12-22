@@ -9,9 +9,8 @@ class UpdateCarRequest extends FormRequest
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
-    {
-        return false;
+    public function authorize(): bool {
+        return true;
     }
 
     /**
@@ -19,10 +18,11 @@ class UpdateCarRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
-    {
+    public function rules(): array {
         return [
-            //
+            'title'   => 'required|max:255',
+            'content' => 'required',
+            'image'   => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072'
         ];
     }
 }

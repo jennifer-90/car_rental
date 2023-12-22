@@ -22,7 +22,7 @@ Route::view('/', 'welcome')->name('welcome');
 Route::get('/cars', [CarController::class, 'index'])->name('cars.index');
 
 //Affiche les détails d'une voiture:
-Route::get('/cars.show', [CarController::class, 'show'])->name('car.show');
+Route::get('/cars/{car}', [CarController::class, 'show'])->name('car.show');
 
 //Page de création d'une nouvelle voiture
 Route::get('/cars.create', [CarController::class, 'create'])->name('car.create'); /*-Retourne une vue-*/

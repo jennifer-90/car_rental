@@ -12,6 +12,7 @@ use App\Models\Car;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class CarController extends Controller
 {
@@ -40,7 +41,8 @@ class CarController extends Controller
         //Création d'une nouvelle instance du modele Car
         $car = new Car([
             'title'   => $request->input('title'),
-            'content' => $request->input('content')
+            'content' => $request->input('content'),
+            'slug'    => str::slug($request->input('title')) // Générer un slug à partir du titre
         ]);
 
         /*-------- Insertion image --------*/

@@ -22,7 +22,9 @@ class StoreCarRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title'   => 'required|max:255',
+            'content' => 'required',
+            'image'   => 'image|mimes:jpeg,png,jpg,gif,svg|max:3072'
         ];
     }
 }
