@@ -8,7 +8,7 @@ git clone https://github.com/jennifer-90/car_rental.git
 
 2. ### Accéder au répertoire du projet
 ``` 
-cd nom_projet 
+cd car_rental 
 ```
 
 3. ### Installer les dépendances avec Composer

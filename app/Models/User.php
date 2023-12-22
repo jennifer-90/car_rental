@@ -1,5 +1,11 @@
 <?php
 
+/*--------------------------------------------------*/
+//app/Http/Controllers/UserController
+//app/Models/User.php
+//database/migrations/...create_users_table.php
+/*--------------------------------------------------*/
+
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
