@@ -32,6 +32,25 @@ Route::post('/cars', [CarController::class, 'store'])->name('car.store');
 
 
 
+
+
+/*-------------------------------------------------*/
+
+// Modification d'une voiture spécifique - METHODE GET (affichage du formulaire)
+Route::get('/cars/update/{car}', [CarController::class, 'edit'])->name('car.edit');
+
+// Mise à jour d'une voiture spécifique - METHODE POST (traitement de la modification)
+Route::post('/cars/update/{car}', [CarController::class, 'update'])->name('car.update');
+
+/*-------------------------------------------------*/
+
+
+
+
+
+//Supprimer une voiture
+Route::delete('cars/{car}', [CarController::class, 'destroy'])->name('car.destroy');
+
 /*--------DASHBOARD----------*/
 
 Route::get('/dashboard', function () {

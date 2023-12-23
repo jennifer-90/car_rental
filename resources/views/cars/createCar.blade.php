@@ -15,7 +15,9 @@
     <label for="title">Title:</label><br>
     <input type="text" name="title" id="title" required><br><br>
 
-    <!-- FAIRE : input hidden id foreign key -->
+    <!-- FAIRE : input hidden id foreign key
+    <input type="hidden" value = "$id"
+    -->
 
     <label for="content">Content:</label><br>
     <textarea name="content" id="content" cols="30" rows="10" required></textarea><br><br>

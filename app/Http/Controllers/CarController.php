@@ -12,6 +12,7 @@ use App\Models\Car;
 use App\Http\Requests\StoreCarRequest;
 use App\Http\Requests\UpdateCarRequest;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CarController extends Controller
@@ -31,7 +32,7 @@ class CarController extends Controller
 
         /*-------- Validation données --------*/
 
-        //Validation des données du formulaire de create
+        //Validation des données du formulaire de création
         $request->validate([
             'title'   => 'required|max:255',
             'content' => 'required',
@@ -45,7 +46,7 @@ class CarController extends Controller
             'slug'    => str::slug($request->input('title')) // Générer un slug à partir du titre
         ]);
 
-        /*-------- Insertion image --------*/
+        //Insertion de l'image
         if ($request->hasFile('image')) {
 
             //On stock le fichier dans la variable image
@@ -61,7 +62,7 @@ class CarController extends Controller
             $car->image = 'img/' . $imageName;
         }
 
-        /*-------- Sauvegarde car dans db --------*/
+        //Sauvegarde de la voiture en db
         $car->save();
 
 
@@ -76,16 +77,53 @@ class CarController extends Controller
 
 
     public function edit(Car $car) {
-        //
+        return view('car.updateCar', compact('car'));
     }
 
+    /*-----------------------CHECK-------------------------*/
 
     public function update(UpdateCarRequest $request, Car $car) {
 
+        //Règles de validation
+        $rules = [
+            'title'   => 'required|max:255',
+            'content' => 'required',
+        ];
+
+        //Si il y'a une nouvelle mage
+        if ($request->hasFile('image')) {
+            $rules['image'] = 'image|mimes:jpeg,png,jpg,gif,svg|max:3072';
+        }
+        $this->validate($request, $rules);
+
+
+        //Si on modifie l'image, on supprime l'ancienne
+        if ($request->hasFile('image')) {
+            //on supprime l'ancienne
+            Storage::delete($car->image);
+            $path_img = $request->image->store('car');
+        }
+
+        //On met à jour les infos:
+        $car->update([
+            'title'   => $request->input('title'),
+            'content' => $request->input('content'),
+            'image'   => isset($path_img) ? $path_img : $car->image
+        ]);
+
+        //redirection vers le car spécifique
+        return redirect(route('car.show', ['car => $car->id'])->with('success', 'Car updated successfully'));
     }
 
 
     public function destroy(Car $car) {
-        //
+
+        //On supprime l'image existante
+        Storage::delete($car->image);
+
+        $car->delete();
+
+        return redirect(route('cars.index'))->with('sucess', 'car deleted successfully');
+
     }
 }
